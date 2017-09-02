@@ -8,6 +8,8 @@ WoT CREATE STRUCT - "wot_create_struct.py" - SYSTEM DESCRIPTION
 
 INTRODUCTION / PREREQUISITE
 
+	Remote repo: https://bitbucket.org/BadButton/wot-create-struct/overview
+	
 	In the WoT installation folder there are compiled python files (pyc) that includes information about the dossier file structure.
 	By using a Python decompiles, as "Uncompyle6", the compiled WoT files can be decomiled to readable and usable py-files.
 	Installing and using a Python decompiler is not covered here.
