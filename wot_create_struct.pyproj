@@ -50,7 +50,7 @@
     <InterpreterReference Include="Global|PythonCore|2.7-32" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_System Description.txt" />
+    <Content Include="System Description.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dossiers2\custom\" />
