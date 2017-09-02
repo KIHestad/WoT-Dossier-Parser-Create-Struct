@@ -1,0 +1,100 @@
+
+WoT CREATE STRUCT - "wot_create_struct.py" - SYSTEM DESCRIPTION
+
+	This is a system description explaining how to extract and decompile WoT source files, 
+	and how to use the python script "wot_create_struct.py" for building struct file.
+	The struct-file produced by this project is to be used as part of the dossier parser: "wotd2j.py".
+	The dossier parser is used to convert WoT dossier.dat binary file to readable dossier.json file.
+
+INTRODUCTION / PREREQUISITE
+
+	In the WoT installation folder there are compiled python files (pyc) that includes information about the dossier file structure.
+	By using a Python decompiles, as "Uncompyle6", the compiled WoT files can be decomiled to readable and usable py-files.
+	Installing and using a Python decompiler is not covered here.
+
+	The Python script "wot_create_struct.py", included in this package, uses the decompiled files extracted from the WoT installation folder.
+	When a new WoT version is released, a new struc-file must be created from this project, and included as part of the dossier-parser: "wotd2j.py".
+	This requires Python files to be inspected and modified. Basic Python programming skills are required to perform these operations.
+
+STEP 1 
+
+	Locate the file: .\World_of_Tanks\res\packages\scripts.pkg
+	Open with WinRAR or 7zip, browse to folder: \scripts\common\dossiers2 and extract all files and subfolder to a temporary folder     
+
+STEP 2
+
+	Open Command Prompt at the location for the extracted files and go to subfoler "dossier2"
+	Run Python decompiler on these files, batch script using uncompyle6:
+
+	uncompyle6 -o .\decompiled\dossiers2\common\DossierBlockBuilders.py .\common\DossierBlockBuilders.pyc
+	uncompyle6 -o .\decompiled\dossiers2\common\DossierBlocks.py .\common\DossierBlocks.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\account_layout.py .\custom\account_layout.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\battle_statistics_layouts.py .\custom\battle_statistics_layouts.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\clan_layout.py .\custom\clan_layout.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\club_layout.py .\custom\club_layout.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\dependencies.py .\custom\dependencies.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\layouts.py .\custom\layouts.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\records.py .\custom\records.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\tankman_layout.py .\custom\tankman_layout.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\updaters.py .\custom\updaters.pyc
+	uncompyle6 -o .\decompiled\dossiers2\custom\vehicle_layout.py .\custom\vehicle_layout.pyc
+	@echo done
+
+STEP 3
+
+	Copy the decompiled py-files from their sub-folders (common / custom) into similar folders for this application, overwrite existing files.
+	Beware of not deleting the __init__.py files located in these folders.
+  
+STEP 4
+
+	Check if new structure categories has been added, open the file: .\custum\updaters.py - this file is not used in the script, only for inspecting changes.
+	Scroll down almost to the bottom of the file, and you will find the lasest struct version in the last class named: 
+
+		def __updateFromVehicleDossierXX(compDescr):
+
+	Keep this file visible, information here is used in STEP 5 and STEP 6
+
+STEP 5
+
+	Open the file "wot_create_struct.py", go to method: "getStructNumber()"
+	Locate the new struct number in "updaters.py" (STEP 4), and edit the value - normally increment with one
+
+STEP 6
+
+	Check for new categories in "updaters.py" (STEP 4), normally added as "addBlock" elements. If no new categories is found, go to STEP 7.
+
+	Open the file "wot_create_struct.py", go to method: "createStructures()"
+	Add new categories as new list items at the bottom of the blocks[] list.
+	Search in the xxx_layout.py files for the correct LIST_NAME_LAYOUT to use, normally it is located in account_layout.py, but can be in one of the others
+	If the new LIST_NAME_LAYOUT is located in vehicle_layout.py this must be referenced in the import statement at the top of the script.
+
+STEP 7
+
+	Open the file "DossierBlocks.py" and comment out this reference using #:
+	#from debug_utils import LOG_ERROR
+
+	Open the file "dependencies.py" and comment out these references using #
+	#from dossiers2.custom.config import RECORD_CONFIGS
+	#from dossiers2.custom.cache import getCache
+	#from dossiers2.custom.utils import getVehicleNationID
+
+	Check the files "account_layout.py" + "vehicle_layout.py" + "club_layout.py" and change name of lists ( remove leading prefix: _ ):
+	_ACHIEVEMENTS15X15_BLOCK_LAYOUT -> ACHIEVEMENTS15X15_BLOCK_LAYOUT 
+	_SINGLE_ACHIEVEMENTS_VALUES - > SINGLE_ACHIEVEMENTS_VALUES
+
+
+STEP 8
+
+	Make sure all changes as saved.
+	
+	Open Command Prompt where the "wot_create_struct.py" is located, and run the script:
+
+		python wot_create_struct.py
+
+	Check the result for error messages, if any errors the "wot_create_struct.py" must be modifies.
+	If there is no errors, the result will be a list of: category, record name, offset value and datatype length.
+	After successful run a file named: "structures_XX.json" will be produced and saved to the main folder of the project. 
+	This file is to be included in the dossier parser script project: "wotd2j.py" in subfolder "structures".
+	Remember to edit the file "wotd2j.py" to include the new struct.
+
+
