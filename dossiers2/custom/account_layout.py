@@ -1,6 +1,6 @@
-# uncompyle6 version 2.11.3
+# uncompyle6 version 3.7.0
 # Python bytecode 2.7 (62211)
-# Decompiled from: Python 2.7.10 (default, May 23 2015, 09:40:32) [MSC v.1500 32 bit (Intel)]
+# Decompiled from: Python 2.7.18 (v2.7.18:8d21aa21f2, Apr 20 2020, 13:19:08) [MSC v.1500 32 bit (Intel)]
 # Embedded file name: scripts/common/dossiers2/custom/account_layout.py
 from dossiers2.common.DossierBlockBuilders import *
 from dossiers2.custom.dependencies import ACHIEVEMENT15X15_DEPENDENCIES
@@ -11,8 +11,8 @@ from dossiers2.custom.dependencies import FALLOUT_STATS_DEPENDENCIES
 from dossiers2.custom.dependencies import FORT_ACHIEVEMENTS_DEPENDENCIES
 from dossiers2.custom.dependencies import GLOBAL_MAP_STATS_DEPENDENCIES
 from dossiers2.custom.dependencies import RANKED_STATS_DEPENDENCIES
-from dossiers2.custom.dependencies import RANKED_BADGES_DEPENDENCIES
 from dossiers2.custom.dependencies import A30X30_STATS_DEPENDENCIES
+from dossiers2.custom.dependencies import EPIC_BATTLE_STATS_DEPENDENCIES
 from battle_statistics_layouts import *
 TOTAL_BLOCK_LAYOUT = [
  'creationTime', 'lastBattleTime', 'battleLifeTime', 'treesCut', 'mileage']
@@ -35,11 +35,12 @@ _globalMapChampionBlockBuilder = StaticSizeBlockBuilder('globalMapChampion', GLO
 _globalMapAbsoluteBlockBuilder = StaticSizeBlockBuilder('globalMapAbsolute', GLOBAL_MAP_BLOCK_LAYOUT, GLOBAL_MAP_STATS_DEPENDENCIES, [])
 _falloutBlockBuilder = StaticSizeBlockBuilder('fallout', FALLOUT_BLOCK_LAYOUT, FALLOUT_STATS_DEPENDENCIES, [])
 _rankedBlockBuilder = StaticSizeBlockBuilder('ranked', RANKED_BLOCK_LAYOUT, RANKED_STATS_DEPENDENCIES, [])
-_rankedCurrentBlockBuilder = StaticSizeBlockBuilder('rankedCurrent', RANKED_BLOCK_LAYOUT, {}, [])
-_rankedPreviousBlockBuilder = StaticSizeBlockBuilder('rankedPrevious', RANKED_BLOCK_LAYOUT, {}, [])
-_rankedCurrentCycleBlockBuilder = StaticSizeBlockBuilder('rankedCurrentCycle', RANKED_BLOCK_LAYOUT, {}, [])
-_rankedPreviousCycleBlockBuilder = StaticSizeBlockBuilder('rankedPreviousCycle', RANKED_BLOCK_LAYOUT, {}, [])
 _a30x30BlockBuilder = StaticSizeBlockBuilder('a30x30', A30X30_BLOCK_LAYOUT, A30X30_STATS_DEPENDENCIES, [])
+_epicBattleBlockBuilder = StaticSizeBlockBuilder('epicBattle', EPIC_BATTLE_BLOCK_LAYOUT, EPIC_BATTLE_STATS_DEPENDENCIES, [])
+_rankedSeason1BlockBuilder = StaticSizeBlockBuilder('rankedSeason1', RANKED_BLOCK_LAYOUT, {}, [])
+_rankedSeason2BlockBuilder = StaticSizeBlockBuilder('rankedSeason2', RANKED_BLOCK_LAYOUT, {}, [])
+_rankedSeason3BlockBuilder = StaticSizeBlockBuilder('rankedSeason3', RANKED_BLOCK_LAYOUT, {}, [])
+_rankedArchiveBlockBuilder = StaticSizeBlockBuilder('rankedArchive', RANKED_BLOCK_LAYOUT, {}, [])
 _max15x15BlockBuilder = StaticSizeBlockBuilder('max15x15', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
 _max7x7BlockBuilder = StaticSizeBlockBuilder('max7x7', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
 _maxRated7x7BlockBuilder = StaticSizeBlockBuilder('maxRated7x7', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
@@ -53,23 +54,54 @@ _maxGlobalMapChampionBlockBuilder = StaticSizeBlockBuilder('maxGlobalMapChampion
 _maxGlobalMapAbsoluteBlockBuilder = StaticSizeBlockBuilder('maxGlobalMapAbsolute', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
 _maxFalloutBlockBuilder = StaticSizeBlockBuilder('maxFallout', MAX_FALLOUT_BLOCK_LAYOUT_WITH_AVATAR, {}, [])
 _maxRankedBlockBuilder = StaticSizeBlockBuilder('maxRanked', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
-_maxRankedCurrentBlockBuilder = StaticSizeBlockBuilder('maxRankedCurrent', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
-_maxRankedPreviousBlockBuilder = StaticSizeBlockBuilder('maxRankedPrevious', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
 _max30x30BlockBuilder = StaticSizeBlockBuilder('max30x30', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
-_vehTypeFragsBlockBuilder = DictBlockBuilder('vehTypeFrags', 'I', 'H', VEH_TYPE_FRAGS_DEPENDENCIES)
-_a15x15CutBlockBuilder = DictBlockBuilder('a15x15Cut', 'I', 'III', {})
-_a7x7CutBlockBuilder = DictBlockBuilder('a7x7Cut', 'I', 'IIIIIII', {})
-_rated7x7CutBlockBuilder = DictBlockBuilder('rated7x7Cut', 'I', 'IIIIIII', {})
-_historicalCutBlockBuilder = DictBlockBuilder('historicalCut', 'I', 'III', {})
-_fortBattlesCutBlockBuilder = DictBlockBuilder('fortBattlesCut', 'I', 'III', {})
-_fortSortiesCutBlockBuilder = DictBlockBuilder('fortSortiesCut', 'I', 'III', {})
-_globalMapCommonCutBlockBuilder = DictBlockBuilder('globalMapCommonCut', 'I', 'III', {})
-_falloutCutBlockBuilder = DictBlockBuilder('falloutCut', 'I', 'IIII', {})
-_rankedCutBlockBuilder = DictBlockBuilder('rankedCut', 'I', 'III', {})
-_rankedCurrentCutBlockBuilder = DictBlockBuilder('rankedCurrentCut', 'I', 'III', {})
-_rankedPreviousCutBlockBuilder = DictBlockBuilder('rankedPreviousCut', 'I', 'III', {})
-_a30x30CutBlockBuilder = DictBlockBuilder('a30x30Cut', 'I', 'III', {})
-_markOfMasteryCut = DictBlockBuilder('markOfMasteryCut', 'I', 'B', {})
+_maxEpicBattleBlockBuilder = StaticSizeBlockBuilder('maxEpicBattle', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
+_maxRankedSeason1BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason1', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
+_maxRankedSeason2BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason2', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
+_maxRankedSeason3BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason3', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
+_maxRankedArchiveBlockBuilder = StaticSizeBlockBuilder('maxRankedArchive', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT, {}, [])
+
+class VEHICLE_STATS:
+    FRAGS = 'vehTypeFrags'
+    A15x15_CUT = 'a15x15Cut'
+    A30x30_CUT = 'a30x30Cut'
+    A7x7_CUT = 'a7x7Cut'
+    HISTORICAL_CUT = 'historicalCut'
+    FORT_SORTIES_CUT = 'fortSortiesCut'
+    FORT_BATTLES_CUT = 'fortBattlesCut'
+    RANKED_CUT = 'rankedCut'
+    RANKED_CUT_SEASON_1 = 'rankedCutSeason1'
+    RANKED_CUT_SEASON_2 = 'rankedCutSeason2'
+    RANKED_CUT_SEASON_3 = 'rankedCutSeason3'
+    RANKED_CUT_ARCHIVE = 'rankedCutArchive'
+    RATED_7x7_CUT = 'rated7x7Cut'
+    GLOBAL_MAP_COMMON_CUT = 'globalMapCommonCut'
+    FALLOUT_CUT = 'falloutCut'
+    MARK_OF_MASTERY_CUT = 'markOfMasteryCut'
+    EPIC_BATTLE_CUT = 'epicBattleCut'
+    ALL = (
+     FRAGS, A15x15_CUT, A30x30_CUT, A7x7_CUT, HISTORICAL_CUT, FORT_SORTIES_CUT, FORT_BATTLES_CUT, RANKED_CUT,
+     RANKED_CUT_SEASON_1, RANKED_CUT_SEASON_2, RANKED_CUT_SEASON_3, RANKED_CUT_ARCHIVE, RATED_7x7_CUT,
+     GLOBAL_MAP_COMMON_CUT, FALLOUT_CUT, MARK_OF_MASTERY_CUT, EPIC_BATTLE_CUT)
+
+
+_vehTypeFragsBlockBuilder = DictBlockBuilder(VEHICLE_STATS.FRAGS, 'I', 'H', VEH_TYPE_FRAGS_DEPENDENCIES)
+_a15x15CutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.A15x15_CUT, 'I', 'III', {})
+_a7x7CutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.A7x7_CUT, 'I', 'IIIIIII', {})
+_rated7x7CutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.RATED_7x7_CUT, 'I', 'IIIIIII', {})
+_historicalCutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.HISTORICAL_CUT, 'I', 'III', {})
+_fortBattlesCutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.FORT_BATTLES_CUT, 'I', 'III', {})
+_fortSortiesCutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.FORT_SORTIES_CUT, 'I', 'III', {})
+_globalMapCommonCutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.GLOBAL_MAP_COMMON_CUT, 'I', 'III', {})
+_falloutCutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.FALLOUT_CUT, 'I', 'IIII', {})
+_rankedCutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.RANKED_CUT, 'I', 'III', {})
+_rankedCutSeason1BlockBuilder = DictBlockBuilder(VEHICLE_STATS.RANKED_CUT_SEASON_1, 'I', 'III', {})
+_rankedCutSeason2BlockBuilder = DictBlockBuilder(VEHICLE_STATS.RANKED_CUT_SEASON_2, 'I', 'III', {})
+_rankedCutSeason3BlockBuilder = DictBlockBuilder(VEHICLE_STATS.RANKED_CUT_SEASON_3, 'I', 'III', {})
+_rankedCutArchiveBlockBuilder = DictBlockBuilder(VEHICLE_STATS.RANKED_CUT_ARCHIVE, 'I', 'III', {})
+_a30x30CutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.A30x30_CUT, 'I', 'III', {})
+_markOfMasteryCut = DictBlockBuilder(VEHICLE_STATS.MARK_OF_MASTERY_CUT, 'I', 'B', {})
+_epicBattleCutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.EPIC_BATTLE_CUT, 'I', 'III', {})
 ACHIEVEMENTS15X15_BLOCK_LAYOUT = [
  'fragsBeast', 'sniperSeries', 'maxSniperSeries', 'invincibleSeries',
  'maxInvincibleSeries', 'diehardSeries', 'maxDiehardSeries', 'killingSeries',
@@ -102,8 +134,17 @@ ACHIEVEMENTS15X15_BLOCK_LAYOUT = [
  'readyForBattleMT', 'readyForBattleHT', 'readyForBattleSPG', 'readyForBattleATSPG',
  'readyForBattleALL', 'tankwomenProgress', 'testartilleryman',
  'maxEFC2016WinSeries', 'EFC2016WinSeries', 'EFC2016Goleador',
- 'markIBomberman', 'markIRepairer', 'markI100Years']
-_achievements15x15PopUps = ['warrior', 'invader', 'sniper', 'defender', 'steelwall', 'supporter',
+ 'markIBomberman', 'markIRepairer', 'markI100Years', 'rankedBattlesHeroProgress',
+ 'FE18ClosedStage', 'FE18SoloStriker', 'FE18SoloMidfielder', 'FE18SoloDefender',
+ 'readyForBattleAllianceUSSR', 'readyForBattleAllianceGermany',
+ 'readyForBattleAllianceUSA', 'readyForBattleAllianceFrance', 'superTesterVeteran',
+ 'RP2018firstmed', 'RP2018secondmed', 'RP2018thirdmed', 'RP2018sergeant',
+ 'BR2019Top1Solo', 'BR2019Top1Squad', 'superTesterVeteranCross',
+ 'rankedDivisionCounter', 'rankedDivisionFighter', 'rankedStayingCounter',
+ 'rankedStayingPower', 'collectorVehicleStrg', 'TenYearsCountdownStageMedal',
+ 'wtHunterWins', 'wtBossWins', 'wtSpecBossDefeat']
+_achievements15x15PopUps = [
+ 'warrior', 'invader', 'sniper', 'defender', 'steelwall', 'supporter',
  'scout', 'medalKay', 'medalCarius', 'medalKnispel', 'medalPoppel', 'medalAbrams',
  'medalLeClerc',
  'medalLavrinenko', 'medalEkins', 'medalWittmann', 'medalOrlik', 'medalOskin',
@@ -132,7 +173,18 @@ _achievements15x15PopUps = ['warrior', 'invader', 'sniper', 'defender', 'steelwa
  'even',
  'readyForBattleLT', 'readyForBattleMT', 'readyForBattleHT', 'readyForBattleSPG',
  'readyForBattleATSPG', 'readyForBattleALL', 'testartilleryman', 'EFC2016Goleador',
- 'markIBomberman', 'markIRepairer', 'markI100Years']
+ 'markIBomberman', 'markIRepairer', 'markI100Years',
+ 'FE18ClosedStage', 'FE18SoloStriker', 'FE18SoloMidfielder', 'FE18SoloDefender',
+ 'readyForBattleAllianceUSSR', 'readyForBattleAllianceGermany',
+ 'readyForBattleAllianceUSA', 'readyForBattleAllianceFrance', 'superTesterVeteran',
+ 'RP2018firstmed', 'RP2018secondmed', 'RP2018thirdmed', 'RP2018sergeant', 'BR2019Top1Solo',
+ 'BR2019Top1Squad', 'superTesterVeteranCross', 'collectorVehicle', 'collectorVehicle0',
+ 'collectorVehicle1', 'collectorVehicle2', 'collectorVehicle3', 'collectorVehicle4',
+ 'collectorVehicle5', 'collectorVehicle6', 'collectorVehicle7',
+ 'collectorVehicle8', 'collectorVehicle9', 'collectorVehicle10', 'collectorVehicle11',
+ 'collectorVehicle12', 'collectorVehicle13', 'collectorVehicle14',
+ 'TenYearsCountdownStageMedal',
+ 'wtHunterWins', 'wtBossWins', 'wtSpecBossDefeat']
 _achievements15x15BlockBuilder = StaticSizeBlockBuilder('achievements', ACHIEVEMENTS15X15_BLOCK_LAYOUT, ACHIEVEMENT15X15_DEPENDENCIES, _achievements15x15PopUps)
 ACHIEVEMENTS7X7_BLOCK_LAYOUT = [
  'wolfAmongSheep', 'wolfAmongSheepMedal', 'geniusForWar',
@@ -170,13 +222,58 @@ SINGLE_ACHIEVEMENTS_VALUES = [
  'deathTrack', 'firstMerit', 'tankwomen', 'operationWinter', 'victoryMarch', 'fallout',
  'fallout2', 'falloutSingleWolf', 'falloutPackOfWolfs', 'falloutSteelHunter',
  'falloutAlwaysInLine', 'moonSphere', 'EFC2016', 'markIProtector', 'markIBaseProtector',
- 'xmasTreeBronze', 'xmasTreeSilver', 'xmasTreeGold', 'rankedBattlesPioneer']
-_singleAchievementsPopUps = ['titleSniper', 'invincible', 'diehard', 'handOfDeath',
+ 'xmasTreeBronze', 'xmasTreeSilver', 'xmasTreeGold',
+ 'rankedBattlesPioneer', 'HE17A1', 'HE17A2', 'HE17A3', 'NY18A1', 'NY18A2', 'NY18A3',
+ 'rankedBattlesHero', 'rankedBattlesSeasonOne',
+ 'FE18Universal', 'FE18Collection1', 'FE18Collection2', 'FE18Collection3',
+ 'FE18OpenRegistration', 'FE18OpenPlayOff', 'FE18OpenFinalStage', 'FE18OpenFirstPlace',
+ 'medalKursk', 'newMeritPM2', 'streamersEventUsha', 'streamersEventJove',
+ 'streamersEventAmway921', 'streamersEventLeBwA', 'twitchPrime',
+ 'alphaTester', 'betaTester', '10YearsOfService', '09YearsOfService', '08YearsOfService',
+ '07YearsOfService', '06YearsOfService', '05YearsOfService', '04YearsOfService',
+ '03YearsOfService', '02YearsOfService', '01YearsOfService', 'NY19A1',
+ 'NY19A2', 'NY19A3', 'epicBattle1', 'epicBattle2', 'epicBattle3', 'epicBattle4',
+ 'DdaymarathonMedal', 'twitchPrime2', 'twitchPrime3', 'se12019Medal',
+ 'Fest19Collection1', 'Fest19Collection2', 'Fest19Collection3', 'twitchPrime4',
+ 'BR2019Title25', 'BR2019Title15', 'BR2019Title5', 'october19', 'Fest19Offspring',
+ 'Fest19Racer', 'november19', 'december19', 'NY20A1', 'NY20A2', 'NY20A3', 'january20',
+ 'february20', 'medalBobLebwa', 'medalBobYusha', 'medalBobAmway921',
+ 'medalBobKorbenDallas', 'medalBobMailand', 'medalBobSkill4ltu', 'medalBobDezgamez',
+ 'medalBobAwesomeEpicGuys', 'medalBobTigers', 'medalBobDragons', 'BattlePassCommonPr_1',
+ 'march20', 'bootcampMedal', 'TenYearsCountdownParticipation', 'se2020Medal', 'june20',
+ 'BattlePassCommonPr_2', 'TenYearsCountdownSPGEventMedal', 'TenYearsCountdownBrawlMedal',
+ 'dedicationMedal1', 'dedicationMedal2', 'dedicationMedal3', 'dedicationMedal4',
+ 'betaTester_cn', 'BigAnniversaryMedal_CN', 'september20', 'BattlePassCommonPr_3',
+ 'hw2019Medal', 'hw2019Medal1', 'hw2019Medal2', 'hw2019Medal3', 'october20']
+_singleAchievementsPopUps = [
+ 'titleSniper', 'invincible', 'diehard', 'handOfDeath',
  'armorPiercer', 'battleCitizen', 'WFC2014', 'tacticalBreakthrough', 'aimer',
  'deathTrack', 'firstMerit', 'tankwomen', 'operationWinter', 'victoryMarch', 'fallout',
  'fallout2', 'falloutSingleWolf', 'falloutPackOfWolfs', 'falloutSteelHunter',
  'falloutAlwaysInLine', 'moonSphere', 'EFC2016', 'markIProtector', 'markIBaseProtector',
- 'xmasTreeBronze', 'xmasTreeSilver', 'xmasTreeGold', 'rankedBattlesPioneer']
+ 'xmasTreeBronze', 'xmasTreeSilver', 'xmasTreeGold', 'rankedBattlesPioneer',
+ 'HE17A1', 'HE17A2', 'HE17A3', 'NY18A1', 'NY18A2', 'NY18A3',
+ 'rankedBattlesHero', 'rankedBattlesSeasonOne',
+ 'FE18Universal', 'FE18Collection1', 'FE18Collection2', 'FE18Collection3',
+ 'FE18OpenRegistration', 'FE18OpenPlayOff', 'FE18OpenFinalStage', 'FE18OpenFirstPlace',
+ 'medalKursk', 'newMeritPM2', 'streamersEventUsha', 'streamersEventJove',
+ 'streamersEventAmway921', 'streamersEventLeBwA', 'twitchPrime',
+ 'alphaTester', 'betaTester', '10YearsOfService', '09YearsOfService', '08YearsOfService',
+ '07YearsOfService', '06YearsOfService', '05YearsOfService', '04YearsOfService',
+ '03YearsOfService', '02YearsOfService', '01YearsOfService', 'NY19A1',
+ 'NY19A2', 'NY19A3', 'epicBattle1', 'epicBattle2', 'epicBattle3', 'epicBattle4',
+ 'DdaymarathonMedal', 'twitchPrime2', 'twitchPrime3', 'se12019Medal',
+ 'Fest19Collection1', 'Fest19Collection2', 'Fest19Collection3', 'twitchPrime4',
+ 'BR2019Title25', 'BR2019Title15', 'BR2019Title5', 'october19',
+ 'Fest19Offspring', 'Fest19Racer', 'november19', 'december19', 'NY20A1', 'NY20A2',
+ 'NY20A3', 'january20', 'february20', 'medalBobLebwa', 'medalBobYusha',
+ 'medalBobAmway921', 'medalBobKorbenDallas', 'medalBobMailand', 'medalBobSkill4ltu',
+ 'medalBobDezgamez', 'medalBobAwesomeEpicGuys', 'medalBobTigers', 'medalBobDragons',
+ 'BattlePassCommonPr_1', 'march20', 'bootcampMedal', 'TenYearsCountdownParticipation',
+ 'se2020Medal', 'june20', 'BattlePassCommonPr_2', 'TenYearsCountdownSPGEventMedal',
+ 'TenYearsCountdownBrawlMedal', 'betaTester_cn', 'BigAnniversaryMedal_CN', 'september20',
+ 'BattlePassCommonPr_3', 'hw2019Medal', 'hw2019Medal1', 'hw2019Medal2', 'hw2019Medal3',
+ 'october20']
 _singleAchievementsBlockBuilder = BinarySetDossierBlockBuilder('singleAchievements', SINGLE_ACHIEVEMENTS_VALUES, {}, _singleAchievementsPopUps)
 FORT_ACHIEVEMENTS_BLOCK_LAYOUT = [
  'conqueror', 'fireAndSword', 'crusher', 'counterblow', 'kampfer', 'soldierOfFortune']
@@ -189,9 +286,8 @@ _clanAchievementsPopUps = ['medalRotmistrov']
 _clanAchievementsBlockBuilder = StaticSizeBlockBuilder('clanAchievements', CLAN_ACHIEVEMENTS_BLOCK_LAYOUT, {}, _clanAchievementsPopUps)
 RANKED_BADGES_BLOCK_LAYOUT = [
  '1', '2', '3', '4', '5', '6', '7', '8', '9']
-rankedBadgesPopUps = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-_rankedBadgesBlockBuilder = StaticSizeBlockBuilder('rankedBadges', RANKED_BADGES_BLOCK_LAYOUT, RANKED_BADGES_DEPENDENCIES, rankedBadgesPopUps)
-_rankedSeasonsBlockBuilder = DictBlockBuilder('rankedSeasons', 'II', 'BBHHH', {})
+_playerBadgesBlockBuilder = DictBlockBuilder('playerBadges', 'I', 'I', {})
+_rankedSeasonsBlockBuilder = DictBlockBuilder('rankedSeasons', 'II', 'BHHHH', {})
 _rareAchievementsBlockBuilder = ListBlockBuilder('rareAchievements', 'I', {})
 UNIQUE_ACHIEVEMENT_VALUES = [
  'histBattle1_battlefield', 'histBattle1_historyLessons',
@@ -215,6 +311,13 @@ FALLOUT_ACHIEVEMENTS_BLOCK_LAYOUT = [
 _falloutAchievementsPopUps = ['shoulderToShoulder', 'aloneInTheField', 'fallenFlags', 'effectiveSupport', 'stormLord',
  'winnerLaurels', 'predator', 'unreachable', 'champion', 'bannerman', 'falloutDieHard']
 _falloutAchievementsBlockBuilder = StaticSizeBlockBuilder('falloutAchievements', FALLOUT_ACHIEVEMENTS_BLOCK_LAYOUT, {}, _falloutAchievementsPopUps)
+EPIC_BATTLE_ACHIEVEMENTS_BLOCK_LAYOUT = [
+ 'occupyingForce', 'ironShield', 'generalOfTheArmy', 'supremeGun',
+ 'smallArmy', 'frontlineMedal']
+_epicBattleAchievementsPopUps = ['frontlineMedal']
+_epicBattleAchievementsBlockBuilder = StaticSizeBlockBuilder('epicBattleAchievements', EPIC_BATTLE_ACHIEVEMENTS_BLOCK_LAYOUT, EPIC_BATTLE_STATS_DEPENDENCIES, _epicBattleAchievementsPopUps)
+_epicBattleSeasonsBlockBuilder = DictBlockBuilder('epicSeasons', 'II', 'HHBB', {})
+_battleRoyaleSeasonsBlockBuilder = DictBlockBuilder('battleRoyaleSeasons', 'II', 'HHBB', {})
 accountDossierLayout = (
  _a15x15BlockBuilder, _a15x15_2BlockBuilder, _clanBlockBuilder,
  _clan2BlockBuilder, _companyBlockBuilder, _company2BlockBuilder, _a7x7BlockBuilder,
@@ -239,13 +342,18 @@ accountDossierLayout = (
  _falloutBlockBuilder, _falloutCutBlockBuilder, _maxFalloutBlockBuilder,
  _falloutAchievementsBlockBuilder,
  _rankedBlockBuilder, _maxRankedBlockBuilder, _rankedCutBlockBuilder,
- _rankedBadgesBlockBuilder, _rankedSeasonsBlockBuilder, _rankedCurrentBlockBuilder,
- _rankedPreviousBlockBuilder, _maxRankedCurrentBlockBuilder, _maxRankedPreviousBlockBuilder,
- _rankedCurrentCutBlockBuilder, _rankedPreviousCutBlockBuilder,
- _rankedCurrentCycleBlockBuilder, _rankedPreviousCycleBlockBuilder,
- _a30x30BlockBuilder, _a30x30CutBlockBuilder, _max30x30BlockBuilder, _markOfMasteryCut)
+ _rankedSeasonsBlockBuilder,
+ _a30x30BlockBuilder, _a30x30CutBlockBuilder, _max30x30BlockBuilder, _markOfMasteryCut,
+ _playerBadgesBlockBuilder,
+ _epicBattleBlockBuilder, _epicBattleCutBlockBuilder, _maxEpicBattleBlockBuilder,
+ _epicBattleAchievementsBlockBuilder, _rankedSeason1BlockBuilder, _rankedSeason2BlockBuilder,
+ _rankedSeason3BlockBuilder, _maxRankedSeason1BlockBuilder, _maxRankedSeason2BlockBuilder,
+ _maxRankedSeason3BlockBuilder, _rankedCutSeason1BlockBuilder, _rankedCutSeason2BlockBuilder,
+ _rankedCutSeason3BlockBuilder, _rankedArchiveBlockBuilder, _maxRankedArchiveBlockBuilder,
+ _rankedCutArchiveBlockBuilder, _epicBattleSeasonsBlockBuilder,
+ _battleRoyaleSeasonsBlockBuilder)
 ACCOUNT_DOSSIER_BLOCKS = {b.name:b for b in accountDossierLayout}
-ACCOUNT_DOSSIER_STATIC_BLOCKS = frozenset((b.name for b in accountDossierLayout if type(b) == StaticSizeBlockBuilder))
+ACCOUNT_DOSSIER_STATIC_BLOCKS = frozenset(b.name for b in accountDossierLayout if type(b) == StaticSizeBlockBuilder)
 ACCOUNT_DOSSIER_BINARY_SET_BLOCKS = [ b.name for b in accountDossierLayout if type(b) == BinarySetDossierBlockBuilder ]
 ACCOUNT_DOSSIER_DICT_BLOCKS = [ b.name for b in accountDossierLayout if type(b) == DictBlockBuilder ]
 ACCOUNT_DOSSIER_LIST_BLOCKS = [ b.name for b in accountDossierLayout if type(b) == ListBlockBuilder ]

@@ -9,8 +9,9 @@
 import cPickle, struct, json, time, sys, os
 from dossiers2.custom.records import *
 from dossiers2.custom.battle_statistics_layouts import *
-from dossiers2.custom.account_layout import *
-from dossiers2.custom.vehicle_layout import COMPENSATION_BLOCK_LAYOUT, ACHIEVEMENTS15X15_BLOCK_LAYOUT
+from dossiers2.custom.vehicle_layout import *
+from dossiers2.custom.account_layout import UNIQUE_ACHIEVEMENT_VALUES
+
 
 def main():
 	createStructures()
@@ -20,7 +21,7 @@ def main():
 def getStructNumber():
     # Must be updated according to return value from the last method named "__updateFromVehicleDossierXX()" 
     # This method is found in file .\custom\updaters.py
-    return 99 
+    return 104
 
 
 def createStructures():
@@ -63,7 +64,13 @@ def createStructures():
         ('ranked', RANKED_BLOCK_LAYOUT), 
         ('maxRanked', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT), 
         ('a30x30', A30X30_BLOCK_LAYOUT), 
-        ('max30x30', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT), 
+        ('max30x30', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT),
+        #102
+        ('maxRankedSeason1', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT),
+        ('maxRankedSeason2', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT),
+        ('maxRankedSeason3', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT),
+        #103 no new blocks
+        #104 no new blocks
 	]
 	
 	# get relevant records to process, in correct order according to layout

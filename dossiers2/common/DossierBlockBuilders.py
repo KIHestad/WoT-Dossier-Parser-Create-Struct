@@ -1,6 +1,6 @@
-# uncompyle6 version 2.11.3
+# uncompyle6 version 3.7.0
 # Python bytecode 2.7 (62211)
-# Decompiled from: Python 2.7.10 (default, May 23 2015, 09:40:32) [MSC v.1500 32 bit (Intel)]
+# Decompiled from: Python 2.7.18 (v2.7.18:8d21aa21f2, Apr 20 2020, 13:19:08) [MSC v.1500 32 bit (Intel)]
 # Embedded file name: scripts/common/dossiers2/common/DossierBlockBuilders.py
 import struct
 from dossiers2.custom.records import RECORDS, RECORD_INDICES, BIT_STORAGES
@@ -20,7 +20,7 @@ class StaticSizeBlockBuilder(object):
         self.__initialData = initial = {}
         offset = 0
         for record, recordPacking in layout:
-            recordInfo = RECORDS[RECORD_INDICES[name, record]]
+            recordInfo = RECORDS[RECORD_INDICES[(name, record)]]
             type, fmt, maxValue = recordInfo[2:5]
             size = struct.calcsize('<' + fmt)
             recordPacking['type'] = type
@@ -33,11 +33,10 @@ class StaticSizeBlockBuilder(object):
             bits = BIT_STORAGES.get((name, record), None)
             if bits is not None:
                 for bit in bits:
-                    bitOffset = RECORDS[RECORD_INDICES[name, bit]][4]
-                    self.__packing[bit] = {'type': 'b',
-                       'storage': record,
-                       'offset': bitOffset
-                       }
+                    bitOffset = RECORDS[RECORD_INDICES[(name, bit)]][4]
+                    self.__packing[bit] = {'type': 'b', 
+                       'storage': record, 
+                       'offset': bitOffset}
 
         self.__blockSize = struct.calcsize(self.__format)
         return
@@ -53,8 +52,6 @@ class DictBlockBuilder(object):
         self.__keyFormat = keyFormat
         self.__valueFormat = valueFormat
         self.__eventsHandlers = eventsHandlers
-        assert _SUPPORTED_FORMATS.issuperset(self.__keyFormat)
-        assert _SUPPORTED_FORMATS.issuperset(self.__valueFormat)
 
     def build(self, dossierDescr, compDescr=''):
         return DictDossierBlockDescr(name=self.name, dossierDescr=dossierDescr, compDescr=compDescr, eventsHandlers=self.__eventsHandlers, keyFormat=self.__keyFormat, valueFormat=self.__valueFormat)
@@ -66,7 +63,6 @@ class ListBlockBuilder(object):
         self.name = name
         self.__itemFormat = itemFormat
         self.__eventsHandlers = eventsHandlers
-        assert _SUPPORTED_FORMATS.issuperset(self.__itemFormat)
 
     def build(self, dossierDescr, compDescr=''):
         return ListDossierBlockDescr(name=self.name, dossierDescr=dossierDescr, compDescr=compDescr, eventsHandlers=self.__eventsHandlers, itemFormat=self.__itemFormat)
@@ -77,7 +73,6 @@ class BinarySetDossierBlockBuilder(object):
     def __init__(self, name, valueNames, eventHandlers, popUpRecords):
         self.name = name
         self.recordsLayout = valueNames
-        assert len(set(valueNames)) == len(valueNames), 'Possible binary set values should be unique'
         self.__valueToPosition = self.__buildValueToPosition(valueNames)
         self.__eventHandlers = eventHandlers
         self.__popUpRecords = popUpRecords

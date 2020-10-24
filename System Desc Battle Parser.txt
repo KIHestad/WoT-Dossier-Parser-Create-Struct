@@ -1,0 +1,93 @@
+
+UPDATE BATTLE PARSER: 
+
+	Manual procedure for creating new battle struct files: battle_results_shared_XX.py and
+	for updating battle parser: wotbr2j.py
+
+STEP 1 
+
+	Locate the file: .\World_of_Tanks\res\packages\scripts.pkg
+	Open with WinRAR or 7zip, browse to folder: \scripts\common\ and extract all files to a temporary folder
+
+STEP 2
+
+	The file: "battle_results_shared.pyc" and "DictPackers.pyc" are the main files to be investigated and must be uncompiled
+	Open Command Prompt at the location for the extracted files from step 1
+	Run Python decompiler on these file, batch script using uncompyle6:
+
+	uncompyle6 -o .\decompiled_battle\battle_results_shared.py .\battle_results_shared.pyc
+	uncompyle6 -o .\decompiled_battle\DictPackers.py .\DictPackers.pyc
+	uncompyle6 -o .\decompiled_battle\vehicles.py .\items\vehicles.pyc
+	uncompyle6 -o .\decompiled_battle\constants.py .\constants.pyc
+	uncompyle6 -o .\decompiled_battle\badges_common.py .\items\badges_common.pyc
+	uncompyle6 -o .\decompiled_battle\typing.py .\site-packages\typing-3.6.2\typing.pyc
+	uncompyle6 -o .\decompiled_battle\battle_pass_common.py .\battle_pass_common.pyc
+	@echo done
+
+STEP 3 *********NEW*********
+
+	Rename current file in ./WotNumbers/WinApp/Dossier2json: "battle_results_shared.py" to battle_results_shared_prevXXX.py
+	Copy the newly uncompiled file with same name to Wot Numbers folder (above)
+	Compare old file with new file, modify first part of file (around 50 lines) where libs are included, make changes in new file similar to prev one 
+	Rest if file should have changes, this is OK - check for some lines at bottom that should be commented out
+	If this works, then there are just minor changes, great :-)
+
+STEP 4
+
+    Find the current "DictPackers.py" in wot numbers folder "D:\Dev\WotNumbers\WinApp\Dossier2json"
+	Find the new file uncompyled with same name
+	Compare this files, if code changes are made the file in Wot Numbers must be replaced with the new one
+
+	*** If changes found in DicktPackers ***
+
+	Start with renaming current file by adding _previousXXX to the name
+	Copy the new file to Wot Numbers
+	
+	Modify new according to old
+	
+	Take a look at brackets "[", uncompyle adds line break after this, [None] is then spit into two lines and must be corrected manually
+
+	A class unpackWthoutChecksum() is added as a custom class to override some issues
+
+	If the file has not changed:
+		The currently used "DictPackers.py" can still be used
+
+	If the file has changed:
+		Rename the newly uncompiled "DictPackers.py" to "DictPackers_XX-NEW"
+		Look for includes not needed by comparing the new to old, for example can this be deleted: "from debug_utils import *", save changes
+		Copy this file into Wot Number folder: "D:\Dev\WotNumbers\WinApp\Dossier2json"
+
+STEP 5
+
+	Locate the files "battle_results_shared_XX.py" and "battle_results_shared_XX-NEW.py" in folder: "D:\Dev\WotNumbers\WinApp\Dossier2json"
+	Compare the content in these files (use BeyondCompare), only do changes in the new file - use the previous one as a guideline for locate changes to be done
+	
+	Look for imports, change the import for DickPackers according to step 4
+		The import might look like this:
+			from DictPackers import Meta, DictPacker, SimpleDictPacker, DeltaPacker, ValueReplayPacker, BunchProxyPacker, roundToInt
+		Change file to reference the new "DictPackers_XX-NEW" or the previous one if no changes: "DictPackers_XX", example:
+			from dictpackers_28 import *
+			
+	Look for other imports, and include the actual class insted of them. Example:
+		locate imports:
+			from items.vehicles import VEHICLE_DEVICE_TYPE_NAMES, VEHICLE_TANKMAN_TYPE_NAMES
+			from constants import FLAG_ACTION
+		Open Command Prompt at the location for the extracted files from step 1 at folder: \scripts\common\
+			uncompyle6 -o .\vehicles.py .\items\vehicles.pyc
+			uncompyle6 -o .\constants.py .\constants.pyc
+		Open the decompiled files, and find the classes: VEHICLE_DEVICE_TYPE_NAMES, VEHICLE_TANKMAN_TYPE_NAMES, FLAG_ACTION in respective file
+		Add the classes to the file
+
+	Take a look at brackets "[", uncompyle adds line break after this, [None] is then spit into two lines and must be corrected manually, other unwanted line breaks can occur
+
+	Check for other changed elements in the file compared to the previous one
+
+step 6 
+
+	Include XX-NEW as the new version number in battle parser, include new file in installer 
+
+
+
+
+
+

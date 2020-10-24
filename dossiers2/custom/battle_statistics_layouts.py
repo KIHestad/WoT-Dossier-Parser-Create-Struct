@@ -1,6 +1,6 @@
-# uncompyle6 version 2.11.3
+# uncompyle6 version 3.7.0
 # Python bytecode 2.7 (62211)
-# Decompiled from: Python 2.7.10 (default, May 23 2015, 09:40:32) [MSC v.1500 32 bit (Intel)]
+# Decompiled from: Python 2.7.18 (v2.7.18:8d21aa21f2, Apr 20 2020, 13:19:08) [MSC v.1500 32 bit (Intel)]
 # Embedded file name: scripts/common/dossiers2/custom/battle_statistics_layouts.py
 from dossiers2.common.DossierBlockBuilders import *
 from dossiers2.custom.dependencies import VEH_TYPE_FRAGS_DEPENDENCIES
@@ -292,7 +292,8 @@ RANKED_BLOCK_LAYOUT = [
  'damageBlockedByArmor',
  'battlesOnStunningVehicles',
  'stunNum',
- 'damageAssistedStun']
+ 'damageAssistedStun',
+ 'playedBonusBattles']
 A30X30_BLOCK_LAYOUT = [
  'xp',
  'battlesCount',
@@ -366,6 +367,38 @@ FALLOUT_BLOCK_LAYOUT = FALLOUT_VEHICLE_BLOCK_LAYOUT_BASE + [
  'battlesOnStunningVehicles',
  'stunNum',
  'damageAssistedStun']
+EPIC_BATTLE_VEHICLE_BLOCK_LAYOUT = [
+ 'xp',
+ 'battlesCount',
+ 'wins',
+ 'losses',
+ 'survivedBattles',
+ 'frags',
+ 'shots',
+ 'directHits',
+ 'spotted',
+ 'damageDealt',
+ 'damageReceived',
+ 'capturePoints',
+ 'droppedCapturePoints',
+ 'originalXP',
+ 'damageAssistedTrack',
+ 'damageAssistedRadio',
+ 'directHitsReceived',
+ 'noDamageDirectHitsReceived',
+ 'piercingsReceived',
+ 'explosionHitsReceived',
+ 'explosionHits',
+ 'piercings',
+ 'winAndSurvived',
+ 'frags8p',
+ 'potentialDamageReceived',
+ 'damageBlockedByArmor',
+ 'battlesOnStunningVehicles',
+ 'stunNum',
+ 'damageAssistedStun',
+ 'deathCount']
+EPIC_BATTLE_BLOCK_LAYOUT = EPIC_BATTLE_VEHICLE_BLOCK_LAYOUT
 MAX_BLOCK_LAYOUT = [
  'maxXP', 'maxFrags', 'maxDamage']
 MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT = MAX_BLOCK_LAYOUT + ['maxXPVehicle', 'maxFragsVehicle', 'maxDamageVehicle']

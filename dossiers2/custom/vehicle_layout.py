@@ -1,6 +1,6 @@
-# uncompyle6 version 2.11.3
+# uncompyle6 version 3.7.0
 # Python bytecode 2.7 (62211)
-# Decompiled from: Python 2.7.10 (default, May 23 2015, 09:40:32) [MSC v.1500 32 bit (Intel)]
+# Decompiled from: Python 2.7.18 (v2.7.18:8d21aa21f2, Apr 20 2020, 13:19:08) [MSC v.1500 32 bit (Intel)]
 # Embedded file name: scripts/common/dossiers2/custom/vehicle_layout.py
 from dossiers2.common.DossierBlockBuilders import *
 from battle_statistics_layouts import *
@@ -11,6 +11,7 @@ from dossiers2.custom.dependencies import FORT_ACHIEVEMENTS_DEPENDENCIES
 from dossiers2.custom.dependencies import GLOBAL_MAP_STATS_DEPENDENCIES
 from dossiers2.custom.dependencies import RANKED_STATS_DEPENDENCIES
 from dossiers2.custom.dependencies import A30X30_STATS_DEPENDENCIES
+from dossiers2.custom.dependencies import EPIC_BATTLE_STATS_DEPENDENCIES
 TOTAL_BLOCK_LAYOUT = [
  'creationTime', 'lastBattleTime', 'battleLifeTime', 'treesCut', 'mileage']
 _totalBlockBuilder = StaticSizeBlockBuilder('total', TOTAL_BLOCK_LAYOUT, {}, [])
@@ -29,6 +30,7 @@ _globalMapCommonBlockBuilder = StaticSizeBlockBuilder('globalMapCommon', GLOBAL_
 _falloutBlockBuilder = StaticSizeBlockBuilder('fallout', FALLOUT_VEHICLE_BLOCK_LAYOUT, FALLOUT_STATS_DEPENDENCIES, [])
 _rankedBlockBuilder = StaticSizeBlockBuilder('ranked', RANKED_BLOCK_LAYOUT, RANKED_STATS_DEPENDENCIES, [])
 _a30x30BlockBuilder = StaticSizeBlockBuilder('a30x30', A30X30_BLOCK_LAYOUT, A30X30_STATS_DEPENDENCIES, [])
+_epicBattleBlockBuilder = StaticSizeBlockBuilder('epicBattle', EPIC_BATTLE_VEHICLE_BLOCK_LAYOUT, {}, [])
 _maxPopUps = [
  'maxXP', 'maxFrags', 'maxDamage']
 _maxFalloutPopUps = _maxPopUps + ['maxWinPoints', 'maxCoins']
@@ -42,8 +44,12 @@ _maxGlobalMapCommonBlockBuilder = StaticSizeBlockBuilder('maxGlobalMapCommon', M
 _maxFalloutBlockBuilder = StaticSizeBlockBuilder('maxFallout', MAX_FALLOUT_BLOCK_LAYOUT, {}, _maxFalloutPopUps)
 _maxRankedBlockBuilder = StaticSizeBlockBuilder('maxRanked', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
 _max30x30BlockBuilder = StaticSizeBlockBuilder('max30x30', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
+_maxEpicBattleBlockBuilder = StaticSizeBlockBuilder('maxEpicBattle', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
 _vehTypeFragsBlockBuilder = DictBlockBuilder('vehTypeFrags', 'I', 'H', VEH_TYPE_FRAGS_DEPENDENCIES)
 _rankedSeasonsBlockBuilder = DictBlockBuilder('rankedSeasons', 'II', 'BB', {})
+_maxRankedSeason1BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason1', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
+_maxRankedSeason2BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason2', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
+_maxRankedSeason3BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason3', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
 ACHIEVEMENTS15X15_BLOCK_LAYOUT = [
  'fragsBeast',
  'sniperSeries',
@@ -130,7 +136,11 @@ ACHIEVEMENTS15X15_BLOCK_LAYOUT = [
  'arsonist',
  'bonecrusher',
  'charmed',
- 'even']
+ 'even',
+ 'marksOfMasteryCount1',
+ 'marksOfMasteryCount2',
+ 'marksOfMasteryCount3',
+ 'marksOfMasteryCount4']
 _achievements15x15PopUps = [
  'tankExpert',
  'tankExpert0',
@@ -196,6 +206,12 @@ FALLOUT_ACHIEVEMENTS_BLOCK_LAYOUT = [
  'falloutDieHard', 'deleted']
 _falloutAchievementsPopUps = ['falloutDieHard']
 _falloutAchievementsBlockBuilder = StaticSizeBlockBuilder('falloutAchievements', FALLOUT_ACHIEVEMENTS_BLOCK_LAYOUT, {}, _falloutAchievementsPopUps)
+EPIC_BATTLE_ACHIEVEMENTS_BLOCK_LAYOUT = [
+ 'occupyingForce', 'ironShield', 'generalOfTheArmy', 'supremeGun',
+ 'smallArmy']
+_epicBattleAchievementsPopUps = ['occupyingForce', 'ironShield', 'generalOfTheArmy', 'supremeGun',
+ 'smallArmy']
+_epicBattleAchievementsBlockBuilder = StaticSizeBlockBuilder('epicBattleAchievements', EPIC_BATTLE_ACHIEVEMENTS_BLOCK_LAYOUT, {}, _epicBattleAchievementsPopUps)
 _playerInscriptionsBlockBuilder = ListBlockBuilder('inscriptions', 'H', {})
 _playerEmblemsBlockBuilder = ListBlockBuilder('emblems', 'H', {})
 _camouflagesBlockBuilder = ListBlockBuilder('camouflages', 'H', {})
@@ -217,4 +233,6 @@ vehicleDossierLayout = (
  _globalMapCommonBlockBuilder, _maxGlobalMapCommonBlockBuilder,
  _falloutBlockBuilder, _maxFalloutBlockBuilder, _falloutAchievementsBlockBuilder,
  _rankedBlockBuilder, _maxRankedBlockBuilder, _rankedSeasonsBlockBuilder,
- _a30x30BlockBuilder, _max30x30BlockBuilder)
+ _a30x30BlockBuilder, _max30x30BlockBuilder,
+ _epicBattleBlockBuilder, _maxEpicBattleBlockBuilder, _epicBattleAchievementsBlockBuilder,
+ _maxRankedSeason1BlockBuilder, _maxRankedSeason2BlockBuilder, _maxRankedSeason3BlockBuilder)

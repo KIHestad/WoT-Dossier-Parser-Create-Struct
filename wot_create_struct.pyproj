@@ -22,16 +22,13 @@
   <ItemGroup>
     <Compile Include="dossiers2\custom\account_layout.py" />
     <Compile Include="dossiers2\custom\battle_statistics_layouts.py" />
-    <Compile Include="dossiers2\custom\cache.py" />
     <Compile Include="dossiers2\custom\clan_layout.py" />
     <Compile Include="dossiers2\custom\club_layout.py" />
-    <Compile Include="dossiers2\custom\config.py" />
     <Compile Include="dossiers2\custom\dependencies.py" />
     <Compile Include="dossiers2\common\DossierBlocks.py" />
     <Compile Include="dossiers2\common\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="dossiers2\custom\utils.py" />
     <Compile Include="dossiers2\custom\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -50,7 +47,14 @@
     <InterpreterReference Include="Global|PythonCore|2.7-32" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="System Description.txt" />
+    <Content Include="structures_100.json" />
+    <Content Include="structures_101.json" />
+    <Content Include="structures_102.json" />
+    <Content Include="structures_103.json" />
+    <Content Include="structures_103_v1.json" />
+    <Content Include="structures_99.json" />
+    <Content Include="System Desc Dossier Parser.txt" />
+    <Content Include="System Desc Battle Parser.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dossiers2\custom\" />

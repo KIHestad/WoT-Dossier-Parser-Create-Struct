@@ -1,9 +1,8 @@
-# uncompyle6 version 2.11.3
+# uncompyle6 version 3.7.0
 # Python bytecode 2.7 (62211)
-# Decompiled from: Python 2.7.10 (default, May 23 2015, 09:40:32) [MSC v.1500 32 bit (Intel)]
+# Decompiled from: Python 2.7.18 (v2.7.18:8d21aa21f2, Apr 20 2020, 13:19:08) [MSC v.1500 32 bit (Intel)]
 # Embedded file name: scripts/common/dossiers2/common/DossierBlocks.py
-import struct
-import weakref
+import struct, weakref
 from array import array
 from itertools import izip
 #from debug_utils import LOG_ERROR
@@ -78,7 +77,6 @@ class StaticDossierBlockDescr(object):
 
     def updateDossierCompDescr(self, dossierCompDescrArray, offset, size):
         if size == 0:
-            assert self.__isExpanded
             compDescrArray = array('c', struct.pack(self.__format, *self.__getValuesForPacking()))
             return (
              dossierCompDescrArray[:offset] + compDescrArray + dossierCompDescrArray[offset:], self.__blockSize)
@@ -116,7 +114,7 @@ class DictDossierBlockDescr(object):
         if keyLength == 1 and valueLength == 1:
             self.__itemToList = lambda key, value: (
              key, value)
-            self.__listToItem = lambda values, idx: (values[idx], values[idx + 1])
+            self.__listToItem = lambda values, idx: (values[idx], values[(idx + 1)])
         elif keyLength == 1 and valueLength != 1:
             self.__itemToList = lambda key, value: (
              key,) + value
@@ -125,7 +123,7 @@ class DictDossierBlockDescr(object):
         elif keyLength != 1 and valueLength == 1:
             self.__itemToList = lambda key, value: key + (value,)
             self.__listToItem = lambda values, idx: (
-             values[idx:idx + keyLength], values[idx + keyLength])
+             values[idx:idx + keyLength], values[(idx + keyLength)])
         else:
             self.__itemToList = lambda key, value: key + value
             self.__listToItem = lambda values, idx: (
@@ -250,8 +248,7 @@ class DictDossierBlockDescr(object):
             fmt = '<' + self.__itemFormat * len(self.__added)
             dossierCompDescrArray = dossierCompDescrArray[:offset + size] + array('c', struct.pack(fmt, *values)) + dossierCompDescrArray[offset + size:]
             self.__added.clear()
-        return (
-         dossierCompDescrArray, newSize)
+        return (dossierCompDescrArray, newSize)
 
     def __unpack(self, compDescr):
         length = len(compDescr) / self.__itemSize
@@ -268,8 +265,7 @@ class DictDossierBlockDescr(object):
             data[key] = value
             offsets[key] = i * self.__itemSize
 
-        return (
-         data, offsets)
+        return (data, offsets)
 
 
 class ListDossierBlockDescr(object):
@@ -382,8 +378,7 @@ class ListDossierBlockDescr(object):
 
             fmt = '<' + self.__itemFormat * len(added)
             dossierCompDescrArray = dossierCompDescrArray[:offset + size] + array('c', struct.pack(fmt, *values)) + dossierCompDescrArray[offset + size:]
-        return (
-         dossierCompDescrArray, newSize)
+        return (dossierCompDescrArray, newSize)
 
     def __unpack(self, compDescr):
         data = []
@@ -474,12 +469,10 @@ class BinarySetDossierBlockDescr(object):
         return bool(self.__unpackedData[byteNum] & bitMask)
 
     def __findSizeDiff(self, value):
-        assert value in self.__valueToPosition, 'The value should be present in the set value list'
         byteNum, bitMask = self.__valueToPosition[value]
         sizeRequired = byteNum + 1
         packedDataSize = len(self.__unpackedData)
-        return (
-         max(sizeRequired - packedDataSize, 0), byteNum, bitMask)
+        return (max(sizeRequired - packedDataSize, 0), byteNum, bitMask)
 
     def __unpack(self, packedStr):
         if not packedStr:
@@ -498,7 +491,7 @@ class BinarySetDossierBlockDescr(object):
 
     def __toSet(self):
         if not self.__cache:
-            self.__cache = set((possibleValue for possibleValue in self.__values if possibleValue in self))
+            self.__cache = set(possibleValue for possibleValue in self.__values if possibleValue in self)
         return self.__cache
 
     def updateDossierCompDescr(self, dossierCompDescrArray, offset, size):
@@ -510,7 +503,8 @@ class BinarySetDossierBlockDescr(object):
             return (
              dossierCompDescrArray, newSize)
         else:
-            return (dossierCompDescrArray[:offset] + array('c', struct.pack(_format, *data)) + dossierCompDescrArray[offset + size:], newSize)
+            return (
+             dossierCompDescrArray[:offset] + array('c', struct.pack(_format, *data)) + dossierCompDescrArray[offset + size:], newSize)
 
 
 def _callEventHandlers(eventsEnabled, handlers, dossierDescr, dossierBlockDescr, args):
