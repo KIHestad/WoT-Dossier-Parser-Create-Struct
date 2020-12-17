@@ -4,9 +4,9 @@
 # Embedded file name: scripts/common/dossiers2/custom/dependencies.py
 import time
 from functools import partial
-#from dossiers2.custom.config import RECORD_CONFIGS
-#from dossiers2.custom.cache import getCache
-#from dossiers2.custom.utils import getVehicleNationID
+from dossiers2.custom.config import RECORD_CONFIGS
+from dossiers2.custom.cache import getCache
+from dossiers2.custom.utils import getVehicleNationID
 _SECONDS_IN_DAY = 86400
 A15X15_STATS_DEPENDENCIES = {}
 

@@ -50,7 +50,7 @@ _rankedSeasonsBlockBuilder = DictBlockBuilder('rankedSeasons', 'II', 'BB', {})
 _maxRankedSeason1BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason1', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
 _maxRankedSeason2BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason2', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
 _maxRankedSeason3BlockBuilder = StaticSizeBlockBuilder('maxRankedSeason3', MAX_BLOCK_LAYOUT, {}, _maxPopUps)
-ACHIEVEMENTS15X15_BLOCK_LAYOUT = [
+_ACHIEVEMENTS15X15_BLOCK_LAYOUT = [
  'fragsBeast',
  'sniperSeries',
  'maxSniperSeries',
@@ -168,7 +168,7 @@ _achievements15x15PopUps = [
  'bonecrusher',
  'charmed',
  'even']
-_achievements15x15BlockBuilder = StaticSizeBlockBuilder('achievements', ACHIEVEMENTS15X15_BLOCK_LAYOUT, ACHIEVEMENT15X15_DEPENDENCIES, _achievements15x15PopUps)
+_achievements15x15BlockBuilder = StaticSizeBlockBuilder('achievements', _ACHIEVEMENTS15X15_BLOCK_LAYOUT, ACHIEVEMENT15X15_DEPENDENCIES, _achievements15x15PopUps)
 ACHIEVEMENTS7X7_BLOCK_LAYOUT = [
  'wolfAmongSheep', 'wolfAmongSheepMedal', 'geniusForWar',
  'geniusForWarMedal', 'kingOfTheHill', 'tacticalBreakthroughSeries',
@@ -186,12 +186,12 @@ _achievements7x7BlockBuilder = StaticSizeBlockBuilder('achievements7x7', ACHIEVE
 UNIQUE_VEH_ACHIEVEMENT_VALUES = []
 _uniqueVehAchievementPopUps = []
 _uniqueVehAchievementBlockBuilder = BinarySetDossierBlockBuilder('uniqueAchievements', UNIQUE_VEH_ACHIEVEMENT_VALUES, {}, _uniqueVehAchievementPopUps)
-SINGLE_ACHIEVEMENTS_VALUES = [
+_SINGLE_ACHIEVEMENTS_VALUES = [
  'titleSniper', 'invincible', 'diehard', 'handOfDeath',
  'armorPiercer', 'tacticalBreakthrough', 'aimer']
 _singleAchievementsPopUps = ['titleSniper', 'invincible', 'diehard', 'handOfDeath',
  'armorPiercer', 'tacticalBreakthrough', 'aimer']
-_singleAchievementsBlockBuilder = BinarySetDossierBlockBuilder('singleAchievements', SINGLE_ACHIEVEMENTS_VALUES, {}, _singleAchievementsPopUps)
+_singleAchievementsBlockBuilder = BinarySetDossierBlockBuilder('singleAchievements', _SINGLE_ACHIEVEMENTS_VALUES, {}, _singleAchievementsPopUps)
 FORT_ACHIEVEMENTS_BLOCK_LAYOUT = [
  'conqueror', 'fireAndSword', 'crusher', 'counterblow', 'kampfer', 'soldierOfFortune']
 _fortPersonalAchievementsPopUps = [

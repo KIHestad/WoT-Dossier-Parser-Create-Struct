@@ -35,10 +35,10 @@ CLUB_ACHIEVEMENTS_BLOCK_LAYOUT = [
 _clubAchievementsPopUps = [
  'strategicOperations']
 _clubAchievementsBlockBuilder = StaticSizeBlockBuilder('achievementsRated7x7', CLUB_ACHIEVEMENTS_BLOCK_LAYOUT, CLUB_ACHIEVEMENTS_DEPENDENCIES, _clubAchievementsPopUps)
-SINGLE_ACHIEVEMENTS_VALUES = [
+_SINGLE_ACHIEVEMENTS_VALUES = [
  'victoryMarch']
 _singleAchievementsPopUps = ['victoryMarch']
-_singleAchievementsBlockBuilder = BinarySetDossierBlockBuilder('singleAchievementsRated7x7', SINGLE_ACHIEVEMENTS_VALUES, {}, _singleAchievementsPopUps)
+_singleAchievementsBlockBuilder = BinarySetDossierBlockBuilder('singleAchievementsRated7x7', _SINGLE_ACHIEVEMENTS_VALUES, {}, _singleAchievementsPopUps)
 clubDossierLayout = (
  _clubTotalBlockBuilder, _clubBattlesBlockBuilder, _clubBestVehiclesBlockBuilder,
  _clubBestMapsBlockBuilder, _clubAchievementsBlockBuilder,

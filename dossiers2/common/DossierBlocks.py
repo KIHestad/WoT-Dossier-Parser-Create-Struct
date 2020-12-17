@@ -5,7 +5,7 @@
 import struct, weakref
 from array import array
 from itertools import izip
-#from debug_utils import LOG_ERROR
+from debug_utils import LOG_ERROR
 
 class StaticDossierBlockDescr(object):
     eventsEnabled = True

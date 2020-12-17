@@ -102,7 +102,7 @@ _rankedCutArchiveBlockBuilder = DictBlockBuilder(VEHICLE_STATS.RANKED_CUT_ARCHIV
 _a30x30CutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.A30x30_CUT, 'I', 'III', {})
 _markOfMasteryCut = DictBlockBuilder(VEHICLE_STATS.MARK_OF_MASTERY_CUT, 'I', 'B', {})
 _epicBattleCutBlockBuilder = DictBlockBuilder(VEHICLE_STATS.EPIC_BATTLE_CUT, 'I', 'III', {})
-ACHIEVEMENTS15X15_BLOCK_LAYOUT = [
+_ACHIEVEMENTS15X15_BLOCK_LAYOUT = [
  'fragsBeast', 'sniperSeries', 'maxSniperSeries', 'invincibleSeries',
  'maxInvincibleSeries', 'diehardSeries', 'maxDiehardSeries', 'killingSeries',
  'fragsSinai',
@@ -185,7 +185,7 @@ _achievements15x15PopUps = [
  'collectorVehicle12', 'collectorVehicle13', 'collectorVehicle14',
  'TenYearsCountdownStageMedal',
  'wtHunterWins', 'wtBossWins', 'wtSpecBossDefeat']
-_achievements15x15BlockBuilder = StaticSizeBlockBuilder('achievements', ACHIEVEMENTS15X15_BLOCK_LAYOUT, ACHIEVEMENT15X15_DEPENDENCIES, _achievements15x15PopUps)
+_achievements15x15BlockBuilder = StaticSizeBlockBuilder('achievements', _ACHIEVEMENTS15X15_BLOCK_LAYOUT, ACHIEVEMENT15X15_DEPENDENCIES, _achievements15x15PopUps)
 ACHIEVEMENTS7X7_BLOCK_LAYOUT = [
  'wolfAmongSheep', 'wolfAmongSheepMedal', 'geniusForWar',
  'geniusForWarMedal', 'kingOfTheHill', 'tacticalBreakthroughSeries',
@@ -216,7 +216,7 @@ HISTORICAL_ACHIEVEMENTS_BLOCK_LAYOUT = [
  'weakVehiclesWins']
 _historicalAchievementsPopUps = ['guardsman', 'makerOfHistory']
 _historicalAchievementsBlockBuilder = StaticSizeBlockBuilder('historicalAchievements', HISTORICAL_ACHIEVEMENTS_BLOCK_LAYOUT, HISTORICAL_ACHIEVEMENTS_DEPENDENCIES, _historicalAchievementsPopUps)
-SINGLE_ACHIEVEMENTS_VALUES = [
+_SINGLE_ACHIEVEMENTS_VALUES = [
  'titleSniper', 'invincible', 'diehard', 'handOfDeath',
  'armorPiercer', 'battleCitizen', 'WFC2014', 'tacticalBreakthrough', 'aimer',
  'deathTrack', 'firstMerit', 'tankwomen', 'operationWinter', 'victoryMarch', 'fallout',
@@ -274,7 +274,7 @@ _singleAchievementsPopUps = [
  'TenYearsCountdownBrawlMedal', 'betaTester_cn', 'BigAnniversaryMedal_CN', 'september20',
  'BattlePassCommonPr_3', 'hw2019Medal', 'hw2019Medal1', 'hw2019Medal2', 'hw2019Medal3',
  'october20']
-_singleAchievementsBlockBuilder = BinarySetDossierBlockBuilder('singleAchievements', SINGLE_ACHIEVEMENTS_VALUES, {}, _singleAchievementsPopUps)
+_singleAchievementsBlockBuilder = BinarySetDossierBlockBuilder('singleAchievements', _SINGLE_ACHIEVEMENTS_VALUES, {}, _singleAchievementsPopUps)
 FORT_ACHIEVEMENTS_BLOCK_LAYOUT = [
  'conqueror', 'fireAndSword', 'crusher', 'counterblow', 'kampfer', 'soldierOfFortune']
 _fortPersonalAchievementsPopUps = [
