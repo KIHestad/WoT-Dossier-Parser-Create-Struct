@@ -2150,8 +2150,6 @@ RECORDS = (
  (
   'achievements', 'RP2018sergeant', 'p', 'B', 4),
  (
-  'achievements', 'RP2018sergeantCounter', 'p', 'H', 65535),
- (
   'singleAchievements', 'epicBattle1', 'p', 'B', 1),
  (
   'singleAchievements', 'epicBattle2', 'p', 'B', 1),
@@ -2310,18 +2308,6 @@ RECORDS = (
  (
   'singleAchievements', 'october20', 'p', 'B', 1),
  (
-  'singleAchievements', 'january21', 'p', 'B', 1),
- (
-  'singleAchievements', 'february21', 'p', 'B', 1),
- (
-  'singleAchievements', 'march21', 'p', 'B', 1),
- (
-  'singleAchievements', 'april21', 'p', 'B', 1),
- (
-  'singleAchievements', 'may21', 'p', 'B', 1),
- (
-  'singleAchievements', 'june21', 'p', 'B', 1),
- (
   'singleAchievements', 'hw2019Medal', 'p', 'B', 1),
  (
   'singleAchievements', 'hw2019Medal1', 'p', 'B', 1),
@@ -2440,131 +2426,7 @@ RECORDS = (
  (
   'singleAchievements', 'BigAnniversaryMedal_CN', 'p', 'B', 1),
  (
-  'singleAchievements', 'BattlePassCommonPr_3', 'p', 'B', 1),
- (
-  'singleAchievements', 'NY21_AtmsphrLevel', 'p', 'B', 1),
- (
-  'singleAchievements', 'NY21_CelebChallenge', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Lebwa_ru', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Yusha_ru', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Amway921_ru', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021KorbenDallas_ru', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021NearYou_ru', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021EvilGranny_ru', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Vspishka_ru', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Inspirer_ru', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Circon_eu', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Dakillzor_eu', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021NewMulti2k_eu', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Orzanel_eu', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Cabbagemechanic_na', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021TragicLoss_na', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021CmdrAF_na', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021MasterTortoise_apac', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021SummerTiger_apac', 'p', 'B', 1),
- (
-  'singleAchievements', 'bob2021Maharlika_apac', 'p', 'B', 1),
- (
-  'singleAchievements', 'BattlePassCommonPr_4', 'p', 'B', 1),
- (
-  'singleAchievements', 'gagarin21', 'p', 'B', 1),
- (
-  'ranked_10x10', 'xp', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'battlesCount', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'wins', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'winAndSurvived', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'losses', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'survivedBattles', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'frags', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'frags8p', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'shots', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'directHits', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'spotted', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'damageDealt', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'damageReceived', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'capturePoints', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'droppedCapturePoints', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'originalXP', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'damageAssistedTrack', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'damageAssistedRadio', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'directHitsReceived', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'noDamageDirectHitsReceived', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'piercingsReceived', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'explosionHitsReceived', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'explosionHits', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'piercings', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'potentialDamageReceived', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'damageBlockedByArmor', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'battlesOnStunningVehicles', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'stunNum', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'damageAssistedStun', 'p', 'I', 4000000001L),
- (
-  'ranked_10x10', 'playedBonusBattles', 'p', 'I', 4000000001L),
- (
-  'maxRanked_10x10', 'maxXP', 'p', 'H', 60001),
- (
-  'maxRanked_10x10', 'maxXPVehicle', 'p', 'I', 4294967295L),
- (
-  'maxRanked_10x10', 'maxFrags', 'p', 'B', 201),
- (
-  'maxRanked_10x10', 'maxFragsVehicle', 'p', 'I', 4294967295L),
- (
-  'maxRanked_10x10', 'maxDamage', 'p', 'H', 60001),
- (
-  'maxRanked_10x10', 'maxDamageVehicle', 'p', 'I', 4294967295L),
- (
-  'singleAchievements', 'BattlePassCommonPr_5', 'p', 'B', 1),
- (
-  'singleAchievements', 'mapboxSeason1', 'p', 'B', 1),
- (
-  'singleAchievements', 'mapboxSeason2', 'p', 'B', 1),
- (
-  'singleAchievements', 'mapboxSeason3', 'p', 'B', 1))
+  'singleAchievements', 'BattlePassCommonPr_3', 'p', 'B', 1))
 RECORD_INDICES = dict((rec[:2], idx) for idx, rec in enumerate(RECORDS))
 RECORD_DB_IDS = {('total', 'creationTime'): 68, 
    ('total', 'lastBattleTime'): 7, 
@@ -3539,7 +3401,6 @@ RECORD_DB_IDS = {('total', 'creationTime'): 68,
    ('achievements', 'RP2018secondmed'): 1241, 
    ('achievements', 'RP2018thirdmed'): 1242, 
    ('achievements', 'RP2018sergeant'): 1243, 
-   ('achievements', 'RP2018sergeantCounter'): 1486, 
    ('singleAchievements', 'epicBattle1'): 1244, 
    ('singleAchievements', 'epicBattle2'): 1245, 
    ('singleAchievements', 'epicBattle3'): 1246, 
@@ -3778,75 +3639,7 @@ RECORD_DB_IDS = {('total', 'creationTime'): 68,
    ('singleAchievements', 'hw2019Medal1'): 1482, 
    ('singleAchievements', 'hw2019Medal2'): 1483, 
    ('singleAchievements', 'hw2019Medal3'): 1484, 
-   ('singleAchievements', 'october20'): 1485, 
-   ('singleAchievements', 'NY21_AtmsphrLevel'): 1487, 
-   ('singleAchievements', 'NY21_CelebChallenge'): 1488, 
-   ('singleAchievements', 'january21'): 1489, 
-   ('singleAchievements', 'bob2021Lebwa_ru'): 1490, 
-   ('singleAchievements', 'bob2021Yusha_ru'): 1491, 
-   ('singleAchievements', 'bob2021Amway921_ru'): 1492, 
-   ('singleAchievements', 'bob2021KorbenDallas_ru'): 1493, 
-   ('singleAchievements', 'bob2021NearYou_ru'): 1494, 
-   ('singleAchievements', 'bob2021EvilGranny_ru'): 1495, 
-   ('singleAchievements', 'bob2021Vspishka_ru'): 1496, 
-   ('singleAchievements', 'bob2021Inspirer_ru'): 1497, 
-   ('singleAchievements', 'bob2021Circon_eu'): 1498, 
-   ('singleAchievements', 'bob2021Dakillzor_eu'): 1499, 
-   ('singleAchievements', 'bob2021NewMulti2k_eu'): 1500, 
-   ('singleAchievements', 'bob2021Orzanel_eu'): 1501, 
-   ('singleAchievements', 'bob2021Cabbagemechanic_na'): 1502, 
-   ('singleAchievements', 'bob2021TragicLoss_na'): 1503, 
-   ('singleAchievements', 'bob2021CmdrAF_na'): 1504, 
-   ('singleAchievements', 'bob2021MasterTortoise_apac'): 1505, 
-   ('singleAchievements', 'bob2021SummerTiger_apac'): 1506, 
-   ('singleAchievements', 'bob2021Maharlika_apac'): 1507, 
-   ('singleAchievements', 'february21'): 1508, 
-   ('singleAchievements', 'BattlePassCommonPr_4'): 1509, 
-   ('singleAchievements', 'march21'): 1510, 
-   ('singleAchievements', 'april21'): 1511, 
-   ('singleAchievements', 'gagarin21'): 1512, 
-   ('singleAchievements', 'may21'): 1513, 
-   ('singleAchievements', 'june21'): 1514, 
-   ('ranked_10x10', 'xp'): 1515, 
-   ('ranked_10x10', 'battlesCount'): 1516, 
-   ('ranked_10x10', 'wins'): 1517, 
-   ('ranked_10x10', 'winAndSurvived'): 1518, 
-   ('ranked_10x10', 'losses'): 1519, 
-   ('ranked_10x10', 'survivedBattles'): 1520, 
-   ('ranked_10x10', 'frags'): 1521, 
-   ('ranked_10x10', 'frags8p'): 1522, 
-   ('ranked_10x10', 'shots'): 1523, 
-   ('ranked_10x10', 'directHits'): 1524, 
-   ('ranked_10x10', 'spotted'): 1525, 
-   ('ranked_10x10', 'damageDealt'): 1526, 
-   ('ranked_10x10', 'damageReceived'): 1527, 
-   ('ranked_10x10', 'capturePoints'): 1528, 
-   ('ranked_10x10', 'droppedCapturePoints'): 1529, 
-   ('ranked_10x10', 'originalXP'): 1530, 
-   ('ranked_10x10', 'damageAssistedTrack'): 1531, 
-   ('ranked_10x10', 'damageAssistedRadio'): 1532, 
-   ('ranked_10x10', 'directHitsReceived'): 1533, 
-   ('ranked_10x10', 'noDamageDirectHitsReceived'): 1534, 
-   ('ranked_10x10', 'piercingsReceived'): 1535, 
-   ('ranked_10x10', 'explosionHitsReceived'): 1536, 
-   ('ranked_10x10', 'explosionHits'): 1537, 
-   ('ranked_10x10', 'piercings'): 1538, 
-   ('ranked_10x10', 'potentialDamageReceived'): 1539, 
-   ('ranked_10x10', 'damageBlockedByArmor'): 1540, 
-   ('ranked_10x10', 'battlesOnStunningVehicles'): 1541, 
-   ('ranked_10x10', 'stunNum'): 1542, 
-   ('ranked_10x10', 'damageAssistedStun'): 1543, 
-   ('ranked_10x10', 'playedBonusBattles'): 1544, 
-   ('maxRanked_10x10', 'maxXP'): 1545, 
-   ('maxRanked_10x10', 'maxXPVehicle'): 1546, 
-   ('maxRanked_10x10', 'maxFrags'): 1547, 
-   ('maxRanked_10x10', 'maxFragsVehicle'): 1548, 
-   ('maxRanked_10x10', 'maxDamage'): 1549, 
-   ('maxRanked_10x10', 'maxDamageVehicle'): 1550, 
-   ('singleAchievements', 'BattlePassCommonPr_5'): 1552, 
-   ('singleAchievements', 'mapboxSeason1'): 1553, 
-   ('singleAchievements', 'mapboxSeason2'): 1554, 
-   ('singleAchievements', 'mapboxSeason3'): 1555}
+   ('singleAchievements', 'october20'): 1485}
 DB_ID_TO_RECORD = dict([ (value, key) for key, value in RECORD_DB_IDS.iteritems() ])
 RECORD_DB_IDS.update({('vehTypeFrags', ''): 863, 
    ('a15x15Cut', ''): 864, 
@@ -3861,7 +3654,6 @@ RECORD_DB_IDS.update({('vehTypeFrags', ''): 863,
    ('rankedCutSeason1', ''): 1400, 
    ('rankedCutSeason2', ''): 1401, 
    ('rankedCutSeason3', ''): 1402, 
-   ('rankedCut_10x10', ''): 1551, 
    ('a30x30Cut', ''): 1138, 
    ('playerBadges', ''): 1145, 
    ('rareAchievements', ''): 872, 

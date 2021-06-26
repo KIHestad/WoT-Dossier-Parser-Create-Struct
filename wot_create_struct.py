@@ -21,7 +21,7 @@ def main():
 def getStructNumber():
     # Must be updated according to return value from the last method named "__updateFromVehicleDossierXX()" 
     # This method is found in file .\custom\updaters.py
-    return 104
+    return 105
 
 
 def createStructures():
@@ -71,6 +71,9 @@ def createStructures():
         ('maxRankedSeason3', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT),
         #103 no new blocks
         #104 no new blocks
+        #105
+        ('ranked_10x10', RANKED_BLOCK_LAYOUT),
+        ('maxRanked_10x10', MAX_AND_BEST_VEHICLE_BLOCK_LAYOUT),
 	]
 	
 	# get relevant records to process, in correct order according to layout
@@ -89,7 +92,7 @@ def createStructures():
 				# get length of datatype
 				r_length = struct.calcsize('<' + newrecord[3])
 				# Debug output
-				print newrecord[0], newrecord[1], r_offset, r_length
+				print (newrecord[0], newrecord[1], r_offset, r_length)
 				# create structure now
 				structure = {"category": newrecord[0], "name": newrecord[1], "offset": r_offset, "length": r_length, "version": r_version}
 				structures.append(structure)

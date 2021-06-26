@@ -4,9 +4,9 @@
 # Embedded file name: scripts/common/dossiers2/custom/dependencies.py
 import time
 from functools import partial
-#from dossiers2.custom.config import RECORD_CONFIGS
-#from dossiers2.custom.cache import getCache
-#from dossiers2.custom.utils import getVehicleNationID
+from dossiers2.custom.config import RECORD_CONFIGS
+from dossiers2.custom.cache import getCache
+from dossiers2.custom.utils import getVehicleNationID
 _SECONDS_IN_DAY = 86400
 A15X15_STATS_DEPENDENCIES = {}
 
@@ -143,9 +143,7 @@ def _set_ACHIEVEMENT15X15_DEPENDENCIES():
        'rankedStayingCounter': [
                               _updateRankedStayingPower], 
        'rankedDivisionCounter': [
-                               _updateRankedDivisionFighter], 
-       'RP2018sergeantCounter': [
-                               _updateRP2018sergeant]})
+                               _updateRankedDivisionFighter]})
 
 
 ACHIEVEMENT7X7_DEPENDENCIES = {}
@@ -1052,15 +1050,6 @@ def _updateWinnerLaurels(dossierDescr, dossierBlockDescr, key, value, prevValue)
     newMedalClass = __getNewMedalClass(medalName, value, medalClass)
     if newMedalClass is not None:
         dossierDescr['falloutAchievements'][medalName] = newMedalClass
-    return
-
-
-def _updateRP2018sergeant(dossierDescr, dossierBlockDescr, key, value, prevValue):
-    medalName = 'RP2018sergeant'
-    medalClass = dossierDescr['achievements'][medalName]
-    newMedalClass = __getNewMedalClass(medalName, value, medalClass)
-    if newMedalClass is not None:
-        dossierDescr['achievements'][medalName] = newMedalClass
     return
 
 

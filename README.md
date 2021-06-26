@@ -8,5 +8,5 @@ WoT Create Struct
 
 System Description
 
-* Check included system description in root folder: System Description.txt
+* Check included system description in root folder: System Desc Dossier Parser.txt
 

@@ -58,7 +58,7 @@ STEP 3
 STEP 4
 
 	Check if new structure categories has been added, open the file: 
-	.\custum\updaters.py - this file is not used in the script, only 
+	.\custom\updaters.py - this file is not used in the script, only 
 	for inspecting changes. Scroll down almost to the bottom of the file, 
 	and you will find the latest struct version in the last class named: 
 
