@@ -21,7 +21,7 @@ def main():
 def getStructNumber():
     # Must be updated according to return value from the last method named "__updateFromVehicleDossierXX()" 
     # This method is found in file .\custom\updaters.py
-    return 105
+    return 106
 
 
 def createStructures():

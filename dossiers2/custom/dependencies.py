@@ -7,6 +7,8 @@ from functools import partial
 #from dossiers2.custom.config import RECORD_CONFIGS
 #from dossiers2.custom.cache import getCache
 #from dossiers2.custom.utils import getVehicleNationID
+#from items.components.ny_constants import CURRENT_YEAR_BADGE_ID, PREVIOUS_YEARS_BADGE_IDS
+
 _SECONDS_IN_DAY = 86400
 A15X15_STATS_DEPENDENCIES = {}
 
@@ -81,7 +83,7 @@ ACHIEVEMENT15X15_DEPENDENCIES = {}
 def _set_ACHIEVEMENT15X15_DEPENDENCIES():
     global ACHIEVEMENT15X15_DEPENDENCIES
     ACHIEVEMENT15X15_DEPENDENCIES.update({'warrior': [
-                 _updateBattleHeroes], 
+                 _updateBattleHeroes, _updateSteamForWarriorMedal], 
        'invader': [
                  _updateBattleHeroes], 
        'sniper': [
@@ -89,7 +91,7 @@ def _set_ACHIEVEMENT15X15_DEPENDENCIES():
        'defender': [
                   _updateBattleHeroes], 
        'steelwall': [
-                   _updateBattleHeroes], 
+                   _updateBattleHeroes, _updateSteamForSteelWallMedal], 
        'supporter': [
                    _updateBattleHeroes], 
        'scout': [
@@ -97,7 +99,7 @@ def _set_ACHIEVEMENT15X15_DEPENDENCIES():
        'evileye': [
                  _updateBattleHeroes], 
        'battleHeroes': [
-                      _updateMedalKay], 
+                      _updateMedalKay, _updateSteamBattleHeroes], 
        'fragsBeast': [
                     _updateBeasthunter], 
        'fragsSinai': [
@@ -145,7 +147,9 @@ def _set_ACHIEVEMENT15X15_DEPENDENCIES():
        'rankedDivisionCounter': [
                                _updateRankedDivisionFighter], 
        'RP2018sergeantCounter': [
-                               _updateRP2018sergeant]})
+                               _updateRP2018sergeant], 
+       'bonecrusher': [
+                     _updateSteamForBonecrusherMedal]})
 
 
 ACHIEVEMENT7X7_DEPENDENCIES = {}
@@ -320,6 +324,54 @@ def _set_FORT_ACHIEVEMENTS_DEPENDENCIES():
     pass
 
 
+SINGLE_ACHIEVEMENTS_DEPENDENCIES = {}
+
+def _set_SINGLE_ACHIEVEMENTS_DEPENDENCIES():
+    global SINGLE_ACHIEVEMENTS_DEPENDENCIES
+    SINGLE_ACHIEVEMENTS_DEPENDENCIES.update({'bootcampMedal': [
+                       _updateSteamBootcamp]})
+
+
+STEAM_ACHIEVEMENT_DEPENDENCIES = {}
+
+def _set_STEAM_ACHIEVEMENT_DEPENDENCIES():
+    global STEAM_ACHIEVEMENT_DEPENDENCIES
+    STEAM_ACHIEVEMENT_DEPENDENCIES.update({'steamBattleCredits': [
+                            _updateSteamBattleCredits], 
+       'steamBattleXP': [
+                       _updateSteamBattleXP], 
+       'steamFreeXP': [
+                     _updateSteamFreeXP], 
+       'steamMasteryMarks': [
+                           _updateSteamMasteryMarksMedals], 
+       'steamBasePoints': [
+                         _updateSteamBasePoints], 
+       'steamHardCharacter': [
+                            _updateSteamHardCharacterMedal], 
+       'steamMedium': [
+                     _updatesteamMediumMedal], 
+       'steamATSPG': [
+                    _updateSteamATSPGMedal], 
+       'steamBreakThrough': [
+                           _updateSteamBreakThroughMedal], 
+       'steamStop': [
+                   _updateSteamStopMedal], 
+       'steamReconnoiter': [
+                          _updateSteamReconnoiterMedal], 
+       'steamPotentialStun': [
+                            _updateSteamPotentialStunMedal], 
+       'steamMileage': [
+                      _updateSteamMileageMedal], 
+       'steamTopLeague': [
+                        _updateSteamTopLeagueMedal], 
+       'steamSpotted': [
+                      _updateSteamSpottedMedal], 
+       'steamFrags': [
+                    _updateSteamFragsMedals], 
+       'steamBattleHeroes': [
+                           _updateSteamOrderMedal]})
+
+
 VEH_TYPE_FRAGS_DEPENDENCIES = {}
 
 def _set_VEH_TYPE_FRAGS_DEPENDENCIES():
@@ -424,6 +476,13 @@ EPIC_BATTLE_STATS_DEPENDENCIES = {}
 
 def _set_EPIC_BATTLE_STATS_DEPENDENCIES():
     pass
+
+
+PLAYER_BADGES_DEPENDENCIES = {}
+
+def _set_PLAYER_BADGES_DEPENDENCIES():
+    PLAYER_BADGES_DEPENDENCIES.update({CURRENT_YEAR_BADGE_ID: [
+                             _updateNYBadges]})
 
 
 def _updateMedalCarius(dossierDescr, dossierBlockDescr, key, value, prevValue):
@@ -534,6 +593,11 @@ def _updateMedalLavrinenko(dossierDescr, dossierBlockDescr, key, value, prevValu
 
 def _updateBattleHeroes(dossierDescr, dossierBlockDescr, key, value, prevValue):
     dossierDescr['achievements']['battleHeroes'] += value - prevValue
+
+
+def _updateSteamBattleHeroes(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if dossierDescr.isBlockInLayout('steamAchievements') and not dossierDescr['steamAchievements']['steamOrderMedal']:
+        dossierDescr['steamAchievements']['steamBattleHeroes'] += value - prevValue
 
 
 def _updateTankwomen(dossierDescr, dossierBlockDescr, key, value, prevValue):
@@ -860,6 +924,131 @@ def _updateSentinelMedal(dossierDescr, dossierBlockDescr, key, value, prevValue)
         dossierBlockDescr['sentinel'] = amountLeft
 
 
+def _updateSteamBattleCredits(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamLittleSavingsMedal'] and not dossierBlockDescr['steamLittleSavingsMedal']:
+        dossierBlockDescr['steamLittleSavingsMedal'] = True
+    if value >= RECORD_CONFIGS['steamMintedCoinMedal'] and not dossierBlockDescr['steamMintedCoinMedal']:
+        dossierBlockDescr['steamMintedCoinMedal'] = True
+    if value >= RECORD_CONFIGS['steamKingMidasMedal']:
+        dossierBlockDescr['steamKingMidasMedal'] = True
+
+
+def _updateSteamBattleXP(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamGoodStudentMedal'] and not dossierBlockDescr['steamGoodStudentMedal']:
+        dossierBlockDescr['steamGoodStudentMedal'] = True
+    if value >= RECORD_CONFIGS['steamBattleHardenedMedal'] and not dossierBlockDescr['steamBattleHardenedMedal']:
+        dossierBlockDescr['steamBattleHardenedMedal'] = True
+    if value >= RECORD_CONFIGS['steamExperienceMedal']:
+        dossierBlockDescr['steamExperienceMedal'] = True
+
+
+def _updateSteamFreeXP(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamHandyMedal'] and not dossierBlockDescr['steamHandyMedal']:
+        dossierBlockDescr['steamHandyMedal'] = True
+    if value >= RECORD_CONFIGS['steamUniversalResourceMedal'] and not dossierBlockDescr['steamUniversalResourceMedal']:
+        dossierBlockDescr['steamUniversalResourceMedal'] = True
+    if value >= RECORD_CONFIGS['steamPowerKnowledgeMedal']:
+        dossierBlockDescr['steamPowerKnowledgeMedal'] = True
+
+
+def _updateSteamFragsMedals(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamSuchWorkMedal'] and not dossierBlockDescr['steamSuchWorkMedal']:
+        dossierBlockDescr['steamSuchWorkMedal'] = True
+    if value >= RECORD_CONFIGS['steamNothingPersonalMedal'] and not dossierBlockDescr['steamNothingPersonalMedal']:
+        dossierBlockDescr['steamNothingPersonalMedal'] = True
+    if value >= RECORD_CONFIGS['steamTheBeginningMedal']:
+        dossierBlockDescr['steamTheBeginningMedal'] = True
+
+
+def _updateSteamMasteryMarksMedals(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamGetMaxMedal'] and not dossierBlockDescr['steamGetMaxMedal']:
+        dossierBlockDescr['steamGetMaxMedal'] = True
+    if value >= RECORD_CONFIGS['steamThreeCheersMedal'] and not dossierBlockDescr['steamThreeCheersMedal']:
+        dossierBlockDescr['steamThreeCheersMedal'] = True
+    if value >= RECORD_CONFIGS['steamGoldenFiveMedal']:
+        dossierBlockDescr['steamGoldenFiveMedal'] = True
+
+
+def _updateSteamForWarriorMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if dossierDescr.isBlockInLayout('steamAchievements') and not dossierDescr['steamAchievements']['steamForWarriorMedal']:
+        dossierDescr['steamAchievements']['steamForWarriorMedal'] = True
+
+
+def _updateSteamForSteelWallMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if dossierDescr.isBlockInLayout('steamAchievements') and not dossierDescr['steamAchievements']['steamForSteelWallMedal']:
+        dossierDescr['steamAchievements']['steamForSteelWallMedal'] = True
+
+
+def _updateSteamForBonecrusherMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if dossierDescr.isBlockInLayout('steamAchievements') and not dossierDescr['steamAchievements']['steamForBonecrusherMedal']:
+        dossierDescr['steamAchievements']['steamForBonecrusherMedal'] = True
+
+
+def _updateSteamOrderMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamOrderMedal']:
+        dossierDescr['steamAchievements']['steamOrderMedal'] = True
+
+
+def _updateSteamSpottedMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamSpottedMedal']:
+        dossierBlockDescr['steamSpottedMedal'] = True
+
+
+def _updateSteamBasePoints(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamBasePointsMedal']:
+        dossierBlockDescr['steamBasePointsMedal'] = True
+
+
+def _updateSteamHardCharacterMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamHardCharacterMedal']:
+        dossierBlockDescr['steamHardCharacterMedal'] = True
+
+
+def _updatesteamMediumMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamMediumMedal']:
+        dossierBlockDescr['steamMediumMedal'] = True
+
+
+def _updateSteamATSPGMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamATSPGMedal']:
+        dossierBlockDescr['steamATSPGMedal'] = True
+
+
+def _updateSteamBreakThroughMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamBreakThroughMedal']:
+        dossierBlockDescr['steamBreakThroughMedal'] = True
+
+
+def _updateSteamStopMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamStopMedal']:
+        dossierBlockDescr['steamStopMedal'] = True
+
+
+def _updateSteamReconnoiterMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamReconnoiterMedal']:
+        dossierBlockDescr['steamReconnoiterMedal'] = True
+
+
+def _updateSteamPotentialStunMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamPotentialStunMedal']:
+        dossierBlockDescr['steamPotentialStunMedal'] = True
+
+
+def _updateSteamMileageMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamMileageMedal']:
+        dossierBlockDescr['steamMileageMedal'] = True
+
+
+def _updateSteamBootcamp(dossierDescr, dossierBlockDescr, value, added):
+    if dossierDescr.isBlockInLayout('steamAchievements') and added:
+        dossierDescr['steamAchievements']['steamBootcampMedal'] = True
+
+
+def _updateSteamTopLeagueMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    if value >= RECORD_CONFIGS['steamTopLeagueMedal']:
+        dossierBlockDescr['steamTopLeagueMedal'] = True
+
+
 def _updateInfiltratorMedal(dossierDescr, dossierBlockDescr, key, value, prevValue):
     amountRequired = RECORD_CONFIGS['infiltratorMedal']
     if value >= amountRequired:
@@ -1076,6 +1265,13 @@ def __getNewMedalClass(medalConfigName, valueToCheck, curMedalClass):
     return
 
 
+def _updateNYBadges(dossierDescr, dossierBlockDescr, key, value, prevValue):
+    for badgeID in PREVIOUS_YEARS_BADGE_IDS:
+        dossierBlockDescr.pop(badgeID, None)
+
+    return
+
+
 def init():
     _set_A15X15_STATS_DEPENDENCIES()
     _set_A7X7_STATS_DEPENDENCIES()
@@ -1085,6 +1281,7 @@ def init():
     _set_VEH_TYPE_FRAGS_DEPENDENCIES()
     _set_HISTORICAL_STATS_DEPENDENCIES()
     _set_HISTORICAL_ACHIEVEMENTS_DEPENDENCIES()
+    _set_SINGLE_ACHIEVEMENTS_DEPENDENCIES()
     _set_FORT_BATTLES_STATS_DEPENDENCIES()
     _set_FORT_SORTIES_STATS_DEPENDENCIES()
     _set_FORT_ACHIEVEMENTS_DEPENDENCIES()
@@ -1095,3 +1292,5 @@ def init():
     _set_FALLOUT_STATS_DEPENDENCIES()
     _set_RANKED_STATS_DEPENDENCIES()
     _set_EPIC_BATTLE_STATS_DEPENDENCIES()
+    _set_STEAM_ACHIEVEMENT_DEPENDENCIES()
+    _set_PLAYER_BADGES_DEPENDENCIES()
